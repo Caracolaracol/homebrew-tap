@@ -1,0 +1,39 @@
+name: Update formula
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-tuxedotask
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Test release metadata validation
+        run: python3 -m unittest discover -s tests -v
+      - name: Read latest stable release and render formula
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 scripts/update_formula.py
+      - run: ruby -c Formula/tuxedotask.rb
+      - name: Commit formula when changed
+        run: |
+          set -euo pipefail
+          git diff --check
+          if git diff --quiet -- Formula/tuxedotask.rb; then
+            echo "Formula already up to date"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Formula/tuxedotask.rb
+          git commit -m "Update Tuxedo Task to latest stable release"
+          git push
