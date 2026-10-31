@@ -2,7 +2,7 @@
 class Tuxedotask < Formula
   desc "Keyboard-driven todo.txt TUI with nested subtasks"
   homepage "https://github.com/Caracolaracol/tuxedo-task"
-  version "2026.10.3"
+  version "2026.10.4"
   license "MIT"
 
   conflicts_with "tuxedo", because: "both provide the tuxedo command"
@@ -11,22 +11,22 @@ class Tuxedotask < Formula
     depends_on macos: :monterey
 
     on_arm do
-      url "https://github.com/Caracolaracol/tuxedo-task/releases/download/v2026.10.3/tuxedo-task-v2026.10.3-aarch64-apple-darwin.tar.gz"
-      sha256 "39b87782a69d0727120935aba078722c9069ccca2b182834a73bdff54f65c9f6"
+      url "https://github.com/Caracolaracol/tuxedo-task/releases/download/v2026.10.4/tuxedo-task-v2026.10.4-aarch64-apple-darwin.tar.gz"
+      sha256 "eb3ab0451ae9dc4e5e711057a791d574b1fc0649c101e1eb797099ac18ae4cce"
     end
     on_intel do
-      url "https://github.com/Caracolaracol/tuxedo-task/releases/download/v2026.10.3/tuxedo-task-v2026.10.3-x86_64-apple-darwin.tar.gz"
-      sha256 "edab99b25cb7b1c8ebdcd17a9a20b45a374b235b784b871ec4d33d96bd76ad9a"
+      url "https://github.com/Caracolaracol/tuxedo-task/releases/download/v2026.10.4/tuxedo-task-v2026.10.4-x86_64-apple-darwin.tar.gz"
+      sha256 "f9ac0a25ef2058c3ee30b4cb41761d457578b55f71f42f185800674436c80e65"
     end
   end
   on_linux do
     on_arm do
-      url "https://github.com/Caracolaracol/tuxedo-task/releases/download/v2026.10.3/tuxedo-task-v2026.10.3-aarch64-unknown-linux-gnu.tar.gz"
-      sha256 "47cbf520f670ae4997e59fabc7bffba7c8fa985ca74758d1642513c9dbb7c152"
+      url "https://github.com/Caracolaracol/tuxedo-task/releases/download/v2026.10.4/tuxedo-task-v2026.10.4-aarch64-unknown-linux-gnu.tar.gz"
+      sha256 "081c32e749b3859cfd36ea96840330e9de31f5fcf018d0a26a58a000db730a0a"
     end
     on_intel do
-      url "https://github.com/Caracolaracol/tuxedo-task/releases/download/v2026.10.3/tuxedo-task-v2026.10.3-x86_64-unknown-linux-gnu.tar.gz"
-      sha256 "18ce372ed4d1f63d2d9d0545a28d8d762f121ba54d5cde22735429cd4a20f319"
+      url "https://github.com/Caracolaracol/tuxedo-task/releases/download/v2026.10.4/tuxedo-task-v2026.10.4-x86_64-unknown-linux-gnu.tar.gz"
+      sha256 "2eef6e7c4b276a01a53aec18ede637dc8e99f7ed67fc0963877b6c6dd9113789"
     end
   end
 
