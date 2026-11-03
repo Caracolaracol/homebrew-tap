@@ -2,7 +2,8 @@
 class Tuxedotask < Formula
   desc "Keyboard-driven todo.txt TUI with nested subtasks"
   homepage "https://github.com/Caracolaracol/tuxedo-task"
-  version "2026.10.4"
+  version "1.0.0"
+  version_scheme 1
   license "MIT"
 
   conflicts_with "tuxedo", because: "both provide the tuxedo command"
@@ -11,22 +12,22 @@ class Tuxedotask < Formula
     depends_on macos: :monterey
 
     on_arm do
-      url "https://github.com/Caracolaracol/tuxedo-task/releases/download/v2026.10.4/tuxedo-task-v2026.10.4-aarch64-apple-darwin.tar.gz"
-      sha256 "eb3ab0451ae9dc4e5e711057a791d574b1fc0649c101e1eb797099ac18ae4cce"
+      url "https://github.com/Caracolaracol/tuxedo-task/releases/download/v1.0.0/tuxedo-task-v1.0.0-aarch64-apple-darwin.tar.gz"
+      sha256 "569b407077bde89beafdd75c7676e3b4179733f33238bbde3dc5125fdf63d701"
     end
     on_intel do
-      url "https://github.com/Caracolaracol/tuxedo-task/releases/download/v2026.10.4/tuxedo-task-v2026.10.4-x86_64-apple-darwin.tar.gz"
-      sha256 "f9ac0a25ef2058c3ee30b4cb41761d457578b55f71f42f185800674436c80e65"
+      url "https://github.com/Caracolaracol/tuxedo-task/releases/download/v1.0.0/tuxedo-task-v1.0.0-x86_64-apple-darwin.tar.gz"
+      sha256 "0b2812fa707f7a06782cf78ea8805b6bc71b0c06b556c65c8e63fc520df8f5e4"
     end
   end
   on_linux do
     on_arm do
-      url "https://github.com/Caracolaracol/tuxedo-task/releases/download/v2026.10.4/tuxedo-task-v2026.10.4-aarch64-unknown-linux-gnu.tar.gz"
-      sha256 "081c32e749b3859cfd36ea96840330e9de31f5fcf018d0a26a58a000db730a0a"
+      url "https://github.com/Caracolaracol/tuxedo-task/releases/download/v1.0.0/tuxedo-task-v1.0.0-aarch64-unknown-linux-gnu.tar.gz"
+      sha256 "1dd6dea3d88bb8d16764b7f7373a2a9c89604faf779e0e59fa3e689bdd7ff33e"
     end
     on_intel do
-      url "https://github.com/Caracolaracol/tuxedo-task/releases/download/v2026.10.4/tuxedo-task-v2026.10.4-x86_64-unknown-linux-gnu.tar.gz"
-      sha256 "2eef6e7c4b276a01a53aec18ede637dc8e99f7ed67fc0963877b6c6dd9113789"
+      url "https://github.com/Caracolaracol/tuxedo-task/releases/download/v1.0.0/tuxedo-task-v1.0.0-x86_64-unknown-linux-gnu.tar.gz"
+      sha256 "44e4c51a5c390b0f88e473913c602da9b04684b89ae49e52bb068bfcf4454d8e"
     end
   end
 
@@ -44,7 +45,7 @@ class Tuxedotask < Formula
   end
 
   test do
-    assert_equal 0, version_scheme
+    assert_equal 1, version_scheme
     expected = "Tuxedo Task #{version}"
     assert_match expected, shell_output("#{bin}/tuxedo --version")
     assert_equal shell_output("#{bin}/tuxedo --version"),
