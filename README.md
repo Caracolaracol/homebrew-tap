@@ -37,6 +37,11 @@ brew update
 brew upgrade caracolaracol/tap/tuxedotask
 ```
 
+Releases from **1.0.0** use SemVer, following the legacy CalVer line ending in
+2026.10.4. The generator sets `version_scheme 1` for SemVer releases so Homebrew
+recognizes the smaller-looking version as an upgrade. Keep this scheme for
+all subsequent SemVer releases; historical CalVer formulas use scheme 0.
+
 [Application documentation](https://caracolaracol.github.io/tuxedo-task/docs/) ·
 [Binary releases](https://github.com/Caracolaracol/tuxedo-task/releases/latest)
 
@@ -62,5 +67,12 @@ ruby -c Formula/tuxedotask.rb
 ```
 
 Formula CI also installs and tests the actual binary on Apple Silicon and Intel
-Mac runners. The application binary and its original copyright remain under MIT;
+Mac runners. Run it manually after an automated formula update: bot pushes do
+not start another workflow.
+
+```sh
+gh workflow run test.yml --repo caracolaracol/homebrew-tap
+```
+
+ The application binary and its original copyright remain under MIT;
 see the [application license](https://github.com/Caracolaracol/tuxedo-task/blob/main/LICENSE).

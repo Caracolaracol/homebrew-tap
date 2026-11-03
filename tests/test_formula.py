@@ -42,6 +42,31 @@ class FormulaTests(unittest.TestCase):
         self.assertNotIn('cargo install', formula)
         self.assertEqual(formula, render_formula(tag, checksums))
 
+    def test_semver_keeps_the_epoch_after_calver(self):
+        checksums = {target: "ab" * 32 for target in TARGETS}
+        for tag in ("v1.0.0", "v1.0.1", "v1.1.0", "v2.0.0"):
+            formula = render_formula(tag, checksums)
+            self.assertIn('version_scheme 1', formula)
+            self.assertIn('assert_equal 1, version_scheme', formula)
+            self.assertIn(f'version "{tag[1:]}"', formula)
+        for tag in ("v2026.10.3", "v2026.10.4"):
+            formula = render_formula(tag, checksums)
+            self.assertNotIn('  version_scheme 1', formula)
+            self.assertIn('assert_equal 0, version_scheme', formula)
+
+    def test_collects_semver_release_assets(self):
+        tag = "v1.0.0"
+        release = {"tag_name": tag, "draft": False, "prerelease": False, "assets": []}
+        for target in TARGETS:
+            filename = archive_name(tag, target)
+            for name in (filename, f"{filename}.sha256"):
+                release["assets"].append({
+                    "name": name, "browser_download_url": release_url(tag, name),
+                })
+        actual, checksums = collect_checksums(release, self.download)
+        self.assertEqual(actual, tag)
+        self.assertIn('version_scheme 1', render_formula(actual, checksums))
+
     def test_refuses_partial_releases(self):
         self.release["assets"].pop()
         with self.assertRaises(ValueError):
