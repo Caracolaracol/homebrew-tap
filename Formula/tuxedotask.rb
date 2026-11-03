@@ -44,6 +44,7 @@ class Tuxedotask < Formula
   end
 
   test do
+    assert_equal 0, version_scheme
     expected = "Tuxedo Task #{version}"
     assert_match expected, shell_output("#{bin}/tuxedo --version")
     assert_equal shell_output("#{bin}/tuxedo --version"),

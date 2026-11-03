@@ -79,6 +79,11 @@ def render_formula(tag, checksums):
     ):
         raise ValueError("A valid checksum for every target is required")
     version = tag[1:]
+    major, minor, _ = map(int, version.split("."))
+    # The legacy CalVer line is numerically higher than 1.x. Homebrew's epoch
+    # must stay 1 for every SemVer release, not just the transition to 1.0.0.
+    is_calver = 2000 <= major <= 2999 and 1 <= minor <= 12
+    scheme_line = "" if is_calver else "\n  version_scheme 1"
     blocks = []
     for os_name, targets in (("macos", TARGETS[:2]), ("linux", TARGETS[2:])):
         lines = [f"  on_{os_name} do"]
@@ -98,7 +103,7 @@ def render_formula(tag, checksums):
 class Tuxedotask < Formula
   desc "Keyboard-driven todo.txt TUI with nested subtasks"
   homepage "https://github.com/{REPOSITORY}"
-  version "{version}"
+  version "{version}"{scheme_line}
   license "MIT"
 
   conflicts_with "tuxedo", because: "both provide the tuxedo command"
@@ -119,6 +124,7 @@ class Tuxedotask < Formula
   end
 
   test do
+    assert_equal {0 if is_calver else 1}, version_scheme
     expected = "Tuxedo Task #{{version}}"
     assert_match expected, shell_output("#{{bin}}/tuxedo --version")
     assert_equal shell_output("#{{bin}}/tuxedo --version"),
